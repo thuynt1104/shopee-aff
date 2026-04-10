@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Tạo Link Shopee Affiliate</title>
+
+<style>
+body{
+font-family: Arial;
+background:#f5f5f5;
+text-align:center;
+padding:40px;
+}
+
+.box{
+background:white;
+padding:30px;
+border-radius:10px;
+width:400px;
+margin:auto;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+button{
+margin-top:15px;
+padding:12px 20px;
+background:#ee4d2d;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.result{
+margin-top:20px;
+font-weight:bold;
+color:green;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Tạo Link Shopee Affiliate</h2>
+
+<p>Dán link Shopee vào đây</p>
+
+<input id="link" placeholder="Dán link Shopee">
+
+<button onclick="convert()">Tạo Link</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+
+function convert(){
+
+let link=document.getElementById("link").value;
+
+let aff="https://shope.ee/yourID?url="+encodeURIComponent(link);
+
+document.getElementById("result").innerHTML=
+"Link Affiliate của bạn:<br>"+aff;
+
+}
+
+</script>
+
+</body>
+</html>
