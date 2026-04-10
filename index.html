@@ -5,75 +5,180 @@
 <title>Tạo Link Shopee Affiliate</title>
 
 <style>
+
 body{
 font-family: Arial;
-background:#f5f5f5;
-text-align:center;
-padding:40px;
+background:#f6f6f6;
+padding:20px;
 }
 
-.box{
-background:white;
-padding:30px;
-border-radius:10px;
-width:400px;
+.container{
+max-width:420px;
 margin:auto;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+margin-bottom:15px;
+}
+
+.title{
+color:#ff5722;
+font-size:22px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.input-box{
+display:flex;
+gap:10px;
+margin-top:10px;
 }
 
 input{
-width:100%;
+flex:1;
 padding:12px;
-margin-top:10px;
+border-radius:8px;
 border:1px solid #ddd;
-border-radius:6px;
 }
 
 button{
-margin-top:15px;
-padding:12px 20px;
-background:#ee4d2d;
-color:white;
 border:none;
-border-radius:6px;
+padding:12px 16px;
+border-radius:8px;
 cursor:pointer;
 }
 
-.result{
-margin-top:20px;
-font-weight:bold;
-color:green;
+.paste{
+background:#ff5722;
+color:white;
 }
+
+.copy{
+background:#4caf50;
+color:white;
+margin-top:10px;
+width:100%;
+}
+
+.result{
+margin-top:15px;
+word-break:break-all;
+color:#333;
+}
+
+.link-btn{
+background:#e8f0fe;
+color:#1967d2;
+padding:15px;
+text-align:center;
+border-radius:10px;
+font-weight:bold;
+}
+
+.telegram{
+background:#f2f2f2;
+padding:15px;
+border-radius:10px;
+}
+
+.guide li{
+margin-bottom:8px;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
 
-<h2>Tạo Link Shopee Affiliate</h2>
+<div class="card">
 
-<p>Dán link Shopee vào đây</p>
+<div class="title">Tạo link</div>
 
-<input id="link" placeholder="Dán link Shopee">
+<div>Dán link Shopee để tạo link Affiliate</div>
 
-<button onclick="convert()">Tạo Link</button>
+<div class="input-box">
+
+<input id="linkInput" placeholder="Dán link Shopee">
+
+<button class="paste" onclick="pasteLink()">Dán link</button>
+
+</div>
+
+<button class="paste" style="margin-top:10px;width:100%;" onclick="createLink()">
+Tạo Link
+</button>
 
 <div class="result" id="result"></div>
+
+<button class="copy" onclick="copyLink()">Copy Link</button>
+
+</div>
+
+<div class="card link-btn">
+Đến bài đăng Facebook
+</div>
+
+<div class="card telegram">
+Vào nhóm Telegram để săn thêm nhiều mã giảm giá
+</div>
+
+<div class="card">
+
+<h3>Hướng dẫn</h3>
+
+<ol class="guide">
+<li>Dán link Shopee rồi nhấn tạo link</li>
+<li>Sao chép link Affiliate</li>
+<li>Chia sẻ link để nhận hoa hồng</li>
+<li>Mỗi sản phẩm nên tạo link mới</li>
+</ol>
+
+</div>
 
 </div>
 
 <script>
 
-function convert(){
+let affLink="";
 
-let link=document.getElementById("link").value;
+function pasteLink(){
+navigator.clipboard.readText().then(text=>{
+document.getElementById("linkInput").value=text;
+});
+}
 
-let aff="https://shope.ee/yourID?url="+encodeURIComponent(link);
+function createLink(){
 
-document.getElementById("result").innerHTML=
-"Link Affiliate của bạn:<br>"+aff;
+let link=document.getElementById("linkInput").value;
+
+if(!link){
+alert("Hãy dán link Shopee");
+return;
+}
+
+affLink="https://shope.ee/YOURID?url="+encodeURIComponent(link);
+
+document.getElementById("result").innerHTML=affLink;
+
+}
+
+function copyLink(){
+
+if(!affLink){
+alert("Chưa có link để copy");
+return;
+}
+
+navigator.clipboard.writeText(affLink);
+
+alert("Đã copy link");
 
 }
 
