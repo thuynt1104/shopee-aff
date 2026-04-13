@@ -85,11 +85,25 @@
 
 <script>
 const AFF_ID = "17372520347";
-
 function pasteLink() {
-    navigator.clipboard.readText().then(text => {
+    if (navigator.clipboard && navigator.clipboard.readText) {
+        navigator.clipboard.readText()
+            .then(text => {
+                document.getElementById('link_input').value = text.trim();
+            })
+            .catch(() => {
+                fallbackPaste();
+            });
+    } else {
+        fallbackPaste();
+    }
+}
+
+function fallbackPaste() {
+    const text = prompt("Dán link vào đây:");
+    if (text) {
         document.getElementById('link_input').value = text.trim();
-    });
+    }
 }
 
 function convertLink() {
