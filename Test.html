@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rút Link Shopee Thuy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .shopee-orange { color: #ee4d2d; }
+        .card { box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800 min-h-screen py-6 px-3">
+
+<div class="max-w-md mx-auto">
+
+    <!-- Header -->
+    <div class="flex items-center justify-center gap-2 mb-6">
+        <div class="w-10 h-10 bg-[#ee4d2d] rounded-xl flex items-center justify-center text-xl text-white">
+            🛒
+        </div>
+        <h1 class="text-xl font-semibold">
+            Rút Link <span class="shopee-orange">Shopee</span>
+        </h1>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-white rounded-2xl card p-4 border">
+
+        <!-- Sub ID -->
+        <div class="mb-4">
+            <label class="text-xs text-gray-500 mb-1 block">
+                Sub ID
+            </label>
+            <input type="text" id="sub_id" value="facebook"
+                class="w-full border rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#ee4d2d]">
+        </div>
+
+        <!-- Link input -->
+        <div class="mb-4">
+            <label class="text-xs text-gray-500 mb-1 block">
+                Link Shopee
+            </label>
+            <div class="flex gap-2">
+                <input type="text" id="link_input"
+                    placeholder="Dán link vào đây..."
+                    class="flex-1 border rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#ee4d2d]">
+
+                <button onclick="pasteLink()"
+                    class="bg-gray-200 px-3 rounded-lg text-sm">
+                    Paste
+                </button>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <button onclick="convertLink()"
+            class="w-full bg-[#ee4d2d] text-white py-3 rounded-xl text-sm font-medium">
+            CHUYỂN LINK
+        </button>
+
+        <!-- Result -->
+        <div id="result_section" class="hidden mt-4">
+            <div class="bg-gray-100 rounded-xl p-3">
+                <p class="text-green-600 text-xs mb-2">
+                    ✅ Link đã tạo
+                </p>
+
+                <div id="result_link"
+                    class="text-xs break-all bg-white p-2 rounded border mb-3">
+                </div>
+
+                <button onclick="copyLink()"
+                    class="w-full bg-green-500 text-white py-2 rounded-lg text-sm">
+                    Copy
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+const AFF_ID = "17372520347";
+
+function pasteLink() {
+    navigator.clipboard.readText().then(text => {
+        document.getElementById('link_input').value = text.trim();
+    });
+}
+
+function convertLink() {
+    let originalLink = document.getElementById('link_input').value.trim();
+
+    if (!originalLink) {
+        alert("Vui lòng dán link!");
+        return;
+    }
+
+    const encoded = encodeURIComponent(originalLink);
+    const subId = document.getElementById('sub_id').value.trim() || "facebook";
+
+    const affLink = `https://s.shopee.vn/an_redir?origin_link=${encoded}&affiliate_id=${AFF_ID}&sub_id=${subId}`;
+
+    document.getElementById('result_link').innerText = affLink;
+    document.getElementById('result_section').classList.remove('hidden');
+}
+
+function copyLink() {
+    const text = document.getElementById('result_link').innerText;
+
+    navigator.clipboard.writeText(text).then(() => {
+        alert("Đã copy!");
+    });
+}
+</script>
+
+</body>
+</html>
